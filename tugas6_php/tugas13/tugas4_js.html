@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas 4 Javascript</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+
+        .tugas{
+            margin: 0;
+            padding: 0;
+            background: #5433FF;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #A5FECB, #20BDFF, #5433FF);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(160deg, #A5FECB, #20BDFF, #5433FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background-repeat: repeat;
+            box-sizing: border-box;
+            height: 100vh;
+        }
+
+        .container{
+            position: relative;
+            top: 20px;
+            width: 600px;
+            border-radius: 10px;
+            margin: auto ;
+            background-color: white;
+            /* box-shadow: 0 0 2px black; */
+            padding: 20px;
+        }
+
+        h1{
+            font-family: 'League Spartan', sans-serif;
+            text-align: center;
+        }
+
+        .formulir{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .kontex1{
+            display: flex;
+            flex-direction: column;
+            /* border: 1px solid black; */
+            width: 250px;
+        }
+
+        .kontex2{
+            display: flex;
+            flex-direction: column;
+            /* border: 1px solid black; */
+            width: 250px;
+        }
+
+        input{
+            outline: none;
+            border-top: 0;
+            border-right: 0;
+            border-left: 0;
+            border-bottom: 1px solid grey;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: 'Raleway', sans-serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+
+        input::placeholder{
+            color: #585d5c7c;
+        }
+
+        .select{
+            position: relative;
+            display: flex;
+            width: 180px;
+            height: 30px;
+            overflow: hidden;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        select{
+            border: 0!important;
+            box-shadow: none;
+            background-color: #5c6664;
+            background-image: none;
+            color: white;
+            padding: 5px .5em;
+            overflow: hidden;
+            font-size: 1em;
+            cursor: pointer;
+            font-family: 'Raleway', sans-serif;
+
+        }
+        .select::after{
+            content: '\25BC';
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding:  5px .5em ;
+            background-color: #2b2e2e;
+            cursor: pointer;
+            color: white;
+            font-size: 17px;
+        }
+
+        .hasil{
+            position: relative;
+            top: 20px;
+            width: 600px;
+            /* height: 30px; */
+            border-radius: 10px;
+            background-color: white;
+            margin: 10px auto;
+            /* padding: 20px; */
+            box-sizing: border-box;
+            letter-spacing: 1px;
+        }
+
+        .jawab{
+            margin-left: 10px;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            width: 450px;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        p{
+            margin-bottom: 5px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="tugas">
+        <div class="container">
+            <h1>Form Kurs</h1>
+            <div class="formulir">
+                <div class="kontex1">
+                    <input type="text" class="pembeli" id="pembeli" placeholder="Nama Pembeli">
+                    <input type="text" class="barang" id="barang" placeholder="Nama Barang">
+                </div>
+                
+                <div class="kontex2">
+                    <input type="text" class="harga" id="harga" placeholder="Harga Barang">
+                    <input type="text" class="jumlah" id="jumlah" placeholder="Jumlah Barang">
+                </div>
+                
+            </div>
+            <div class="select">
+                <select name="valuta" id="valuta" class="valuta">
+                    <option selected disabled> Pilih Valuta Asing </option>
+                    <option value="Dollar US">-- USD --</option>
+                    <option value="Dollar Singa">-- SGD --</option>
+                    <option value="Euro">-- ERP --</option>
+                </select>
+            </div>
+            
+            
+        </div>
+        <div class="hasil">
+            <div id="isi">
+                
+            </div>
+            
+        </div>
+    </div>
+
+    <script lang="javascript">
+       
+        let valos = document.getElementById("valuta");
+
+        valos.onchange = () => {
+        
+        
+            let valas = document.getElementById("valuta").value;
+            let beli = document.getElementById("pembeli").value;
+            let barang = document.getElementById("barang").value;
+            let harga = document.getElementById("harga").value;
+            let jumlah = document.getElementById("jumlah").value;
+            let isi = document.getElementById("isi");
+
+
+            let harga2 = parseInt(harga);
+            let jumlah2 = parseInt(jumlah);
+            let valas2, valas3, total;
+                if (valas == "Dollar US") {
+                    valas2 = 14900;
+                    valas3 = "USD => RP"
+                } else if (valas == "Dollar Singa") {
+                    valas2 = 10500;
+                    valas3 = "SGD => RP"
+                } else if (valas == "Euro") {
+                    valas2 = 15000;
+                    valas3 = "ERP => RP"
+                } else {
+                    valas2 = "Tidak ada data yang valid";
+                    valas3 = "Kosong";
+                }
+            
+                total = valas2*jumlah2*harga2;
+
+                isi.innerHTML = ` <div class="jawab">
+    
+            <div class="detail1">
+            <div class="batas">
+                <p>Nama Pembeli: </p> 
+                <p>${beli}</p>
+            </div>
+            <br>
+            <div class="batas">
+                <p> Nama Barang:</p> 
+                <p> ${barang}</p>
+            </div>
+            <br>
+            <div class="batas">
+                <p> Harga Barang:</p> 
+                <p>${harga}</p>
+            </div>
+            <br>
+            <div class="batas">
+                <p>Jumlah Barang:</p> 
+                <p>${jumlah}</p>
+            </div>
+            <br>
+            </div>
+            
+            <div class="detail2">
+            <div class="batas">
+                <p> Kurs:</p> 
+                <p class="tab">&emsp; ${valas3}</p>
+            </div>
+            <br>
+            <div class="batas">
+                <p> Total Harga:</p> 
+                <p  class="tab">&emsp; ${total}</p>
+            </div>
+            </div>
+        </div>
+                    `
+        }
+    </script>
+</body>
+</html>
